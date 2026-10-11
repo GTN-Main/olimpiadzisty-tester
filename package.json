@@ -1,0 +1,38 @@
+{
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "cli-table3": "^0.6.5",
+    "p-limit": "^7.3.3",
+    "picospinner": "^3.1.2"
+  },
+  "devDependencies": {
+    "@e18e/eslint-plugin": "^0.8.1",
+    "@types/node": "^26.6.5",
+    "lint-staged": "^17.6.0",
+    "oxfmt": "^0.72.0",
+    "oxlint": "^1.87.0",
+    "oxlint-tsgolint": "^7.0.2003",
+    "simple-git-hooks": "^2.14.0",
+    "typescript": "^7.0.2"
+  },
+  "simple-git-hooks": {
+    "post-checkout": "pnpm i",
+    "post-merge": "pnpm i",
+    "pre-commit": "pnpm exec tsc && pnpm exec lint-staged"
+  },
+  "lint-staged": {
+    "*.{ts,js,json}": [
+      "oxfmt",
+      "oxlint"
+    ]
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.10.1",
+      "onFail": "download"
+    }
+  },
+  "packageManager": "pnpm@12.10.1"
+}
