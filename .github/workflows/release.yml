@@ -22,6 +22,8 @@ jobs:
         run: bun install
       - name: Build executable
         run: bun build ./main.ts --compile --bytecode --minify --target=bun-windows-x64 --outfile GTN-Tester
+      - name: Compress artifact
+        run: zip -9 GTN-Tester-windows-x64.zip GTN-Tester.exe run.bat
       - name: Create release
         uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # 3.0.3
         with:
@@ -29,5 +31,4 @@ jobs:
           generate_release_notes: true
           make_latest: true
           files: |
-            GTN-Tester.exe
-            run.bat
+            GTN-Tester-windows-x64.zip
