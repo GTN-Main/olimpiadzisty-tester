@@ -83,7 +83,7 @@ async function main() {
                         }
 
                         const expectedResult = await readFile(outFile, "utf-8");
-                        const normalize = (string: string) => string.replace(/\r\n/g, "\n").trim();
+                        const normalize = (string: string) => string.replaceAll("\r", "").trim();
                         const isPassed = normalize(result) === normalize(expectedResult);
 
                         if (!isPassed) errorCount++;
@@ -93,9 +93,9 @@ async function main() {
                             baseName,
                             executionTime + " ms",
                             code,
-                            testData,
-                            result,
-                            expectedResult,
+                            normalize(testData),
+                            normalize(result),
+                            normalize(expectedResult),
                         ]);
                         resolve();
                     });
