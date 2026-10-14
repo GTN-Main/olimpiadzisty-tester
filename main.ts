@@ -9,6 +9,10 @@ import { Spinner } from "picospinner";
 
 async function main() {
     const dir = process.argv[2]?.replaceAll("\\", "/");
+    const truncate = (string: string, maxLength = 100) =>
+        string.length > maxLength
+            ? `${string.slice(0, maxLength)}... [${string.length} chars]`
+            : string;
 
     if (dir === undefined) {
         console.error("correct usage: node main.ts <path>");
@@ -93,9 +97,9 @@ async function main() {
                             baseName,
                             executionTime + " ms",
                             code,
-                            normalize(testData),
-                            normalize(result),
-                            normalize(expectedResult),
+                            normalize(truncate(testData)),
+                            normalize(truncate(result)),
+                            normalize(truncate(expectedResult)),
                         ]);
                         resolve();
                     });
